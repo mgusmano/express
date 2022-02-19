@@ -22,6 +22,11 @@ app.get('/json', (req, res) => {
   res.json({ a: 1 });
 })
 
+app.post('/form', function(req, res) {
+  console.log(req.body)
+  console.log('form post')
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
