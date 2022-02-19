@@ -16,6 +16,12 @@ app.get('/client', function(req, res) {
   res.sendFile(path.join(__dirname, 'client', '/index.html'));
 });
 
+app.get('/json', (req, res) => {
+  console.log(req.query)
+  console.log(req.query.a)
+  res.json({ a: 1 });
+})
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
