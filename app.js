@@ -3,6 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+import { Low, JSONFile } from 'lowdb'
+
+const adapter = new JSONFile('db.json')
+const db = new Low(adapter)
+await db.read()
+db.data ||= { posts: [] }
+
+const { posts } = db.data
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -27,6 +37,17 @@ app.post('/form', function(req, res) {
   console.log('form post')
   res.json({ a: 100 });
 });
+
+app.get('/posts/:id', async (req, res) => {
+  const post = posts.find((p) => p.id === req.params.id)
+  res.send(post)
+})
+
+app.post('/posts', async (req, res, next) => {
+  const post = posts.push(req.body)
+  await db.write()
+  res.send(post)
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
