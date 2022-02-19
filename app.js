@@ -9,6 +9,13 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+app.use(express.static('public'))
+app.use(express.static('client'))
+
+app.get('/client', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client', '/index.html'));
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
