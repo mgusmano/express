@@ -1,41 +1,50 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const app = express();
+const port = 80;
+const path = require('path');
+//https://code.visualstudio.com/docs/nodejs/nodejs-debugging
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(express.static('public'))
+app.use(express.static('client'))
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.set('json spaces', 2);
+
+app.get('/json', (req, res) => {
+    console.log(req.query)
+    console.log(req.query.a)
+    res.json({ a: 1 });
+})
+
+app.get('/client', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client', '/index.html'));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.get('/client/form.html', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client', '/form.html'));
 });
 
-module.exports = app;
+app.post('/form', function(req, res) {
+    console.log(req.body)
+    console.log('form post')
+});
+
+app.get('/', (req, res) => {
+    //console.log('hi')
+    //debugger
+    res.send('Hello World!')
+})
+
+app.post('/', (req, res) => {
+    res.send('Got a POST request')
+})
+
+app.get('/about', (req, res) => {
+    res.send('about')
+  })
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
