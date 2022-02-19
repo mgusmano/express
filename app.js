@@ -25,6 +25,7 @@ app.get('/json', (req, res) => {
 app.post('/form', function(req, res) {
   console.log(req.body)
   console.log('form post')
+  res.json({ a: 100 });
 });
 
 // view engine setup
