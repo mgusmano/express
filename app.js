@@ -6,7 +6,7 @@ var logger = require('morgan');
 var d = require('./data.js')
 
 
-//const port = 80;
+const port = 80;
 
 console.log('hi')
 
@@ -91,8 +91,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
-// })
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
 module.exports = app;
