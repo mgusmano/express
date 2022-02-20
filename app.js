@@ -6,41 +6,7 @@ var logger = require('morgan');
 var d = require('./data.js')
 
 
-const port = 80;
-
-// var low = require("lowdb");
-// var FileSync = require("lowdb/adapters/FileSync");
-// var adapter = new FileSync(path.dirname("public/db.json"));
-// var db = low(adapter);
-
-// const doIt = async () => {
-// const low = await import('lowdb')
-// //let low = require('lowdb'),
-// //FileSync = require('lowdb/adapters/FileSync'),
-// const JSONFile = await import('lowdb/adapters/JSONFile')
-// const adapter = new JSONFile('db.json')
-// const db = low(adapter);
-// return db
-// }
- 
-// const db =  doIt()
-
-
-//let { Low } = require('lowdb/lib/Low.js'),
-//import { Low, JSONFile } from 'lowdb'
-//FileSync = require('lowdb/adapters/FileSync'),
-//adapter = new FileSync('db.json')
-
-//const adapter = new JSONFile('db.json')
-//const db = new Low(adapter)
-
-//import { Low, JSONFile } from 'lowdb'
-
-//const adapter = new JSONFile('db.json')
-//const db = new Low(adapter)
-
-//const JSONdb = require('simple-json-db');
-//const db = new JSONdb('/db.json');
+//const port = 80;
 
 console.log('hi')
 
@@ -125,8 +91,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`)
+// })
 
 module.exports = app;
