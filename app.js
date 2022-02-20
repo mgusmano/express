@@ -3,12 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var d = require('./data.js')
+
+
 const port = 80;
 
-var low = require("lowdb");
-var FileSync = require("lowdb/adapters/FileSync");
-var adapter = new FileSync(path.dirname("public/db.json"));
-var db = low(adapter);
+// var low = require("lowdb");
+// var FileSync = require("lowdb/adapters/FileSync");
+// var adapter = new FileSync(path.dirname("public/db.json"));
+// var db = low(adapter);
 
 // const doIt = async () => {
 // const low = await import('lowdb')
@@ -55,9 +58,10 @@ app.get('/client', function(req, res) {
 });
 
 app.get('/json', (req, res) => {
+  console.log(d)
 
-  var u = db.get("users")
-  console.log(u)
+  //var u = db.get("users")
+  //console.log(u)
 
   //db.push("/test1","super test");
 
@@ -69,7 +73,7 @@ app.get('/json', (req, res) => {
 
   console.log(req.query)
   console.log(req.query.a)
-  res.json({ a: 1 });
+  res.json(d);
 })
 
 app.post('/form', function(req, res) {
